@@ -1,5 +1,6 @@
 workspace "GameEngine"
 	architecture "x64"
+	startproject "Sandbox"
 
 	configurations {
 		"Debug",
@@ -22,7 +23,7 @@ project "GameEngine"
 		"%{prj.name}/src/**.cpp"
 	}
 
-	include {
+	includedirs {
 		"%{prj.name}/vendor/spdlog/include"
 	}
 
@@ -36,8 +37,8 @@ project "GameEngine"
 			"GE_BUILD_DLL"
 		}
 
-		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" ..outDir.. "/Sandbox")
+		postbuildcommands {
+			"{COPY} %{cfg.buildtarget.relpath} ..\\bin\\" .. outDir .. "\\Sandbox"
 		}
 
 	filter "configurations:Debug"
@@ -65,8 +66,8 @@ project "Sandbox"
 		"%{prj.name}/src/**.cpp"
 	}
 
-	include {
-		"%{prj.name}/vendor/spdlog/include",
+	includedirs {
+		"GameEngine/vendor/spdlog/include",
 		"GameEngine/src"
 	}
 
